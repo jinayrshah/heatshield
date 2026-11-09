@@ -7,7 +7,7 @@ Decisions agreed in the planning thread. Update this file whenever a decision ch
 | Item | Decision |
 |---|---|
 | Type | Final-year B.Tech major project |
-| Duration | 2 semesters |
+| Duration | 2 semesters, delivered in phases (ship as soon as each phase is ready) |
 | Team | 1 (solo) |
 | Primary goal | A working, end-to-end product **deployed for real-world use** |
 | Later (not now) | Research paper, publication, formal evaluation write-up |
@@ -29,14 +29,16 @@ Broad, not tied to one NGO or employer:
 | Area | Decision |
 |---|---|
 | Language | English only for now (design so more can be added later) |
-| Channels | Telegram bot (primary demo), WhatsApp (Cloud API) where budget allows; web app |
+| Channels | Telegram **and** WhatsApp (Cloud API), plus a web app |
 | Hardware sensors | **Out of scope for now.** Parked for later; architecture keeps a slot for them |
 | Street-level ML model | In scope. Ground truth from public stations (CPCB, IMD) and satellite data, since own sensors are parked |
 | Personal alerts + risk engine | In scope |
 | Dashboard | In scope |
 | Voice calls / SMS / regional languages | Later |
 
-## 4. Feature tiers
+## 4. Features
+
+Decision: **all features below are in scope.** Tiers only set build order (phases), not whether a feature is built.
 
 ### Must have (core product)
 - Sign-up through the bot: location (pin or area name), work type, usual work hours.
@@ -81,8 +83,23 @@ Broad, not tied to one NGO or employer:
 | Domain (optional) | `.in` or `.com` | ₹700–1,000 / year |
 | AI answers (optional) | Small model, capped usage | ₹0–500 |
 
-## 6. Open questions
+## 6. Coverage plan (proposed, awaiting decision)
 
-- Which features from "Should have" to commit to for semester 1 vs semester 2.
-- Telegram only, or Telegram + WhatsApp for the final deployment.
-- Whether the street-level model covers all of Mumbai or a few wards first.
+- **Alerts, forecasts and dashboard: all of Mumbai (and any location) from day one.**
+- **Street-level ML model: runs over all of Mumbai**, because satellite data covers the whole city at no extra cost.
+- **Deep validation and showcase: 5 contrasting focus wards** with nearby public weather stations:
+
+| Ward | Areas | Why |
+|---|---|---|
+| M/E | Govandi, Mankhurd, Deonar | Most vulnerable: dense informal settlements, landfill, many outdoor workers |
+| L | Kurla, Saki Naka | Dense mixed industry and housing, transport hub |
+| G/N | Dharavi, Dadar, Mahim | Very dense, huge informal workforce |
+| K/E | Andheri East, MIDC, airport | Industrial, construction-heavy, near IMD Santacruz |
+| A | Colaba, Fort | Coastal control with sea breeze, IMD Colaba observatory |
+| (optional) P | Goregaon East, Aarey | Green control near forest |
+
+Station locations to be confirmed during data collection.
+
+## 7. Open questions
+
+- Approve the coverage plan and focus wards above.
