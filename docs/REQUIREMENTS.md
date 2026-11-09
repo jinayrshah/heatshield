@@ -83,7 +83,7 @@ Decision: **all features below are in scope.** Tiers only set build order (phase
 | Domain (optional) | `.in` or `.com` | ₹700–1,000 / year |
 | AI answers (optional) | Small model, capped usage | ₹0–500 |
 
-## 6. Coverage plan (proposed, awaiting decision)
+## 6. Coverage plan (approved)
 
 - **Alerts, forecasts and dashboard: all of Mumbai (and any location) from day one.**
 - **Street-level ML model: runs over all of Mumbai**, because satellite data covers the whole city at no extra cost.
@@ -102,4 +102,4 @@ Station locations to be confirmed during data collection.
 
 ## 7. Open questions
 
-- Approve the coverage plan and focus wards above.
+- Approve the phased build plan in `docs/PHASES.md` and its tech-stack choices.
