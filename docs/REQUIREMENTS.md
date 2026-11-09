@@ -83,14 +83,13 @@ Decision: **all features below are in scope.** Tiers only set build order (phase
 | Domain (optional) | `.in` or `.com` | ₹700–1,000 / year |
 | AI answers (optional) | Small model, capped usage | ₹0–500 |
 
-## 6. Coverage plan
+## 6. Coverage plan (approved)
 
 Decision (2026-11-09, approved by Bhagya Shah): **approved as below, with all 6 focus wards, including P.**
 
-
 - **Alerts, forecasts and dashboard: all of Mumbai (and any location) from day one.**
 - **Street-level ML model: runs over all of Mumbai**, because satellite data covers the whole city at no extra cost.
-- **Deep validation and showcase: 5 contrasting focus wards** with nearby public weather stations:
+- **Deep validation and showcase: 6 contrasting focus wards** with nearby public weather stations:
 
 | Ward | Areas | Why |
 |---|---|---|
@@ -105,5 +104,4 @@ Station locations to be confirmed during data collection.
 
 ## 7. Open questions
 
-
-None right now.
+- Approve the phased build plan in `docs/PHASES.md` and its tech-stack choices.
