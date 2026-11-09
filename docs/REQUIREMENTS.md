@@ -85,9 +85,11 @@ Decision: **all features below are in scope.** Tiers only set build order (phase
 
 ## 6. Coverage plan (approved)
 
+Decision (2026-11-09, approved by Bhagya Shah): **approved as below, with all 6 focus wards, including P.**
+
 - **Alerts, forecasts and dashboard: all of Mumbai (and any location) from day one.**
 - **Street-level ML model: runs over all of Mumbai**, because satellite data covers the whole city at no extra cost.
-- **Deep validation and showcase: 5 contrasting focus wards** with nearby public weather stations:
+- **Deep validation and showcase: 6 contrasting focus wards** with nearby public weather stations:
 
 | Ward | Areas | Why |
 |---|---|---|
@@ -96,7 +98,7 @@ Decision: **all features below are in scope.** Tiers only set build order (phase
 | G/N | Dharavi, Dadar, Mahim | Very dense, huge informal workforce |
 | K/E | Andheri East, MIDC, airport | Industrial, construction-heavy, near IMD Santacruz |
 | A | Colaba, Fort | Coastal control with sea breeze, IMD Colaba observatory |
-| (optional) P | Goregaon East, Aarey | Green control near forest |
+| P | Goregaon East, Aarey | Green control near forest |
 
 Station locations to be confirmed during data collection.
 

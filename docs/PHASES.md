@@ -76,7 +76,7 @@ P0 Foundation ─► P1 Telegram alerts (MVP, live) ─► P2 WhatsApp + web app
 - Feature extraction (Google Earth Engine): land-surface temperature, NDVI, built-up density, distance to sea, elevation for a ~100 m Mumbai grid.
 - Training data: collected station readings vs forecast; model learns the local correction.
 - LightGBM model; validation by holding out whole stations; SHAP explanations.
-- Deep evaluation in focus wards M/E, L, G/N, K/E, A (+ optional P).
+- Deep evaluation in focus wards M/E, L, G/N, K/E, A and P.
 - Model output feeds alerts and the dashboard; automatic fallback to raw forecast if the model fails checks.
 - Forecast accuracy page: forecast vs observed, updated daily.
 
