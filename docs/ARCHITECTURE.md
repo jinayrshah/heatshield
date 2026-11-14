@@ -39,10 +39,10 @@ heatshield/        Python package — physics + risk (pure, no I/O except foreca
   forecast.py      Open-Meteo client → hourly WBGT
   cli.py           command-line forecast
 tests/             pytest suite (no network)
-backend/           FastAPI service, DB models, scheduler, messaging (planned)
+backend/           FastAPI service ✅: API, DB models, alert job, messaging channels
+web/               React + Vite + MapLibre web app ✅ (PWA), served by the backend
 ml/                downscaling notebooks + training code (planned)
-firmware/          ESP32 sensor node (planned)
-dashboard/         web dashboard (planned)
+firmware/          ESP32 sensor node (parked)
 docs/              proposal, architecture, roadmap
 ```
 
@@ -59,15 +59,25 @@ docs/              proposal, architecture, roadmap
 | Location privacy | Store grid cell id, not coordinates | Minimises personal data |
 | Messaging | Channel adapters behind one interface | Swap WhatsApp/SMS/voice providers freely |
 
-## Failure handling (to implement in backend)
+## As built (2026-11-14)
+
+- **One process**: `uvicorn backend.main:app` serves the API under `/api` and the built web app. APScheduler runs the alert job in the same process every 30 minutes (minute 0 and 30, so half-hour timezones like IST work) and once at start-up.
+- **Forecast cache**: locations are rounded to 2 decimals (~1 km cell). One Open-Meteo call per cell per hour; the city map fetches all 24 ward centres in one multi-location call. If a refresh fails, the previous forecast is served and marked stale for up to 36 h.
+- **Database**: SQLite by default, Postgres via `DATABASE_URL`. Tables: users (cell, not coordinates), alerts (unique per user, kind, day and slot, so a re-run never double-sends), anonymous counters, job runs.
+- **Accounts**: no password or phone number. Sign-up returns a random token kept on the device; only its SHA-256 hash is stored. Telegram is linked with a one-time code.
+- **Channels**: web inbox always; Telegram and WhatsApp switch on when their environment variables are set. A failed channel is recorded per alert and does not stop the others.
+- **Map**: MapLibre with OpenStreetMap raster tiles (no key). Ward polygons from DataMeet, simplified to ~40 m (29 KB).
+
+## Failure handling
 
 | Failure | Behaviour |
 |---|---|
-| Forecast fetch fails | Retry with backoff; if still failing by 05:30, send alert from previous run marked "based on yesterday's forecast"; page the operator |
-| Missing hourly values | Skip that hour (never guess); alert if > 3 hours missing |
-| Message provider down | Fallback channel (WhatsApp → SMS); log undelivered |
+| Forecast fetch fails | ✅ Serve previous forecast marked stale (alerts say "based on an earlier forecast"); retry every 5 min; failed job run recorded and operator told on Telegram |
+| Missing hourly values | ✅ Skip that hour (never guess); job planner skips windows with a gap |
+| Message provider down | ✅ Logged per alert and in delivery-rate stats; other channels still sent. SMS fallback later |
 | Sensor offline | Exclude from validation; dashboard shows "stale" after 2 h |
 | Model output out of range | Fall back to raw forecast WBGT for that cell |
 
-A silent pipeline failure on a hot day is the worst outcome, so the daily job
-emits a heartbeat and the operator is alerted if it is missing.
+A silent pipeline failure on a hot day is the worst outcome, so every job run
+is recorded and `/api/health` reports `alert_job_healthy: false` if there has
+been no successful run for 75 minutes. Point UptimeRobot (free) at it.

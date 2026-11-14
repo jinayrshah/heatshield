@@ -19,11 +19,13 @@ matters enormously in humid coastal cities like Mumbai.
 | WBGT physics engine (Liljegren 2008) | ✅ done, validated against ECMWF `thermofeel` to ±0.01 °C |
 | Risk engine (NIOSH / ISO 7243 limits, work/rest) | ✅ done |
 | Open-Meteo forecast → hourly WBGT CLI | ✅ done |
+| API, database, alert job (morning, peak, warm night), heartbeat | ✅ done — see [`backend/`](backend/) |
+| Web app: heat now, 7-day outlook, plan a job, Mumbai ward map, symptom check, water near me, sign-up and alerts inbox | ✅ done — see [`web/`](web/) |
+| Alert channels: web inbox, Telegram, WhatsApp Cloud API | ✅ code done; needs bot token / Meta approval to go live |
+| Deployment | ⏳ next |
 | Street-level ML downscaling | ⏳ planned — see [`ml/`](ml/) |
-| Low-cost WBGT sensor nodes | ⏳ planned — see [`firmware/`](firmware/) |
-| API, database, alert scheduler | ⏳ planned — see [`backend/`](backend/) |
-| WhatsApp / SMS / voice alerts (Hindi, Marathi) | ⏳ planned |
-| City / employer dashboard | ⏳ planned — see [`dashboard/`](dashboard/) |
+| Team mode, weekly summary, regional languages, SMS / voice | ⏳ planned |
+| Low-cost WBGT sensor nodes | ⏸ parked — see [`firmware/`](firmware/) |
 
 Full plan: [`docs/PROPOSAL.md`](docs/PROPOSAL.md) · [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) · [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
@@ -37,7 +39,20 @@ python -m pytest -q                                   # run the tests
 python -m heatshield.cli --city mumbai --work heavy   # today's hourly heat risk
 ```
 
-Options: `--work light|moderate|heavy|very_heavy`, `--days 1-7`,
+### Run the website
+
+```bash
+pip install -r requirements.txt
+(cd web && npm install && npm run build)        # build the web app once
+uvicorn backend.main:app --reload               # open http://localhost:8000
+```
+
+No internet or want a repeatable demo? Start it with `HEATSHIELD_SAMPLE_DATA=1`
+to use a recorded Mumbai forecast. While working on the web app, run
+`npm run dev` in `web/` as well and open the address it prints (it forwards
+`/api` to port 8000). Settings are listed in [`.env.example`](.env.example).
+
+CLI options: `--work light|moderate|heavy|very_heavy`, `--days 1-7`,
 `--unacclimatised` (for someone new to the heat).
 
 Example output columns: local time, air temp, humidity, solar radiation,
