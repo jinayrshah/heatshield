@@ -1,0 +1,13 @@
+{
+  "name": "HeatShield",
+  "short_name": "HeatShield",
+  "description": "Hour-by-hour heat risk, work and rest times and alerts for people who work outdoors.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbf7f1",
+  "theme_color": "#b3401a",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
