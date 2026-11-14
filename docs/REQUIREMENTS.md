@@ -102,6 +102,25 @@ Decision (2026-11-09, approved by Bhagya Shah): **approved as below, with all 6 
 
 Station locations to be confirmed during data collection.
 
-## 7. Open questions
+## 7. Built so far (2026-11-14)
+
+Web app and backend on branch `feat/web-app`: heat now, 7-day outlook, plan a job,
+Mumbai ward map with time slider and hotspot ranking, symptom check with first aid,
+water and hospitals near me (OpenStreetMap), sign-up with no password, settings,
+pause, delete my data, alerts inbox, morning / peak / warm-night alerts, acclimatisation
+(14 days of stricter limits), usage statistics, health heartbeat, open API docs.
+Telegram and WhatsApp delivery is coded and switches on with credentials.
+
+Decisions taken while building (change here if you disagree):
+
+| Item | Decision |
+|---|---|
+| Web accounts | Device token, no password or phone number; Telegram linked with a one-time code |
+| Warm night | Coolest hour from 22:00 to 06:00 at or above 28 °C (configurable) |
+| Peak reminder | At most one per risk level per day, only inside the user's working hours |
+| Morning alert | From 06:00 local; catches up until 09:59 if a run was missed |
+| Map tiles | OpenStreetMap raster tiles; move to a hosted free tier if traffic grows |
+
+## 8. Open questions
 
 - Approve the phased build plan in `docs/PHASES.md` and its tech-stack choices.

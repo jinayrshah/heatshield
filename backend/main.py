@@ -140,6 +140,8 @@ def create_app(settings: Settings | None = None, store: ForecastStore | None = N
             tick = lambda: run_tick(state.sessions, state.channels, state.store, settings)  # noqa: E731
             # Minute 0 and 30 cover both whole-hour and half-hour timezones such as India (UTC+5:30).
             scheduler.add_job(tick, "cron", minute="0,30", id="tick", max_instances=1, coalesce=True)
+            # Also run once right after start-up, so a restart at 06:10 still sends the morning alert.
+            scheduler.add_job(tick, "date", id="tick-startup", run_date=datetime.now(timezone.utc) + timedelta(seconds=5))
             scheduler.start()
             state.scheduler = scheduler
         yield

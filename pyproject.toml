@@ -5,6 +5,8 @@ description = "Hyperlocal heat-stress early warning for outdoor workers"
 requires-python = ">=3.10"
 dependencies = ["requests>=2.31"]
 
+# The web service (backend/) also needs these; see requirements.txt.
+
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
 

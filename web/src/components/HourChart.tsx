@@ -1,13 +1,25 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Hour } from '../api'
 import { clock, hourOf, LEVEL_LABEL, workRest } from '../lib'
 import { LevelIcon } from './ui'
 
-const W = 720
 const H = 250
 const PAD = { top: 18, right: 14, bottom: 58, left: 38 }
 const STRIP_Y = H - 46
 const STRIP_H = 14
+
+/** Draw in real pixels so text stays readable on phones instead of shrinking with the SVG. */
+function useWidth(ref: React.RefObject<HTMLDivElement | null>, fallback = 720): number {
+  const [w, setW] = useState(fallback)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const ro = new ResizeObserver(([e]) => setW(Math.max(300, Math.round(e.contentRect.width))))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [ref])
+  return w
+}
 
 /**
  * One day of heat stress: the WBGT line against the limit for the chosen
@@ -16,6 +28,8 @@ const STRIP_H = 14
 export function HourChart({ hours, nowTime }: { hours: Hour[]; nowTime?: string }) {
   const [active, setActive] = useState<number | null>(null)
   const svg = useRef<SVGSVGElement>(null)
+  const box = useRef<HTMLDivElement>(null)
+  const W = useWidth(box)
 
   const g = useMemo(() => {
     const values = hours.flatMap((h) => [h.wbgt_c, h.limit_c])
@@ -30,7 +44,7 @@ export function HourChart({ hours, nowTime }: { hours: Hour[]; nowTime?: string 
     const step = hi - lo > 12 ? 4 : 2
     for (let v = lo; v <= hi; v += step) ticks.push(v)
     return { lo, hi, slot, x, y, ticks, innerW }
-  }, [hours])
+  }, [hours, W])
 
   if (hours.length === 0) return null
   const limit = hours[0].limit_c
@@ -54,7 +68,7 @@ export function HourChart({ hours, nowTime }: { hours: Hour[]; nowTime?: string 
   const limitAbove = g.y(limit) - PAD.top > 26
   return (
     <figure className="chart">
-      <div className="chart-plot">
+      <div className="chart-plot" ref={box}>
         <svg
           ref={svg}
           viewBox={`0 0 ${W} ${H}`}
@@ -73,7 +87,7 @@ export function HourChart({ hours, nowTime }: { hours: Hour[]; nowTime?: string 
           <path className="wbgt-area" d={area} />
           <line className="limit" x1={PAD.left} x2={W - PAD.right} y1={g.y(limit)} y2={g.y(limit)} />
           <text className="limit-label" x={W - PAD.right} y={g.y(limit) + (limitAbove ? -7 : 16)} textAnchor="end">
-            Limit for this work {limit.toFixed(1)}°
+            {W < 520 ? 'Limit' : 'Limit for this work'} {limit.toFixed(1)}°
           </text>
           <path className="wbgt-line" d={line} />
           {nowIdx >= 0 && (
@@ -89,7 +103,7 @@ export function HourChart({ hours, nowTime }: { hours: Hour[]; nowTime?: string 
           {hours.map((h) => (
             <rect key={h.time} className={`cell lv-fill-${h.level}`} x={g.x(h) - g.slot / 2 + 1} y={STRIP_Y} width={g.slot - 2} height={STRIP_H} rx="3" />
           ))}
-          {[0, 3, 6, 9, 12, 15, 18, 21].map((hr) => (
+          {(W < 520 ? [0, 6, 12, 18] : [0, 3, 6, 9, 12, 15, 18, 21]).map((hr) => (
             <text key={hr} className="tick" x={PAD.left + (hr + 0.5) * g.slot} y={H - 12} textAnchor="middle">
               {String(hr).padStart(2, '0')}:00
             </text>
