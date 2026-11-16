@@ -1,3 +1,3 @@
 # ml
 
-Planned: street-level WBGT downscaling (LightGBM) from satellite land-surface temperature, NDVI, built-up density and distance to sea, validated against HeatShield sensor nodes. See ../docs/ROADMAP.md months 3-4.
+Planned: street-level WBGT downscaling from satellite features, trained on public station data. See work packages C1 to C3 in [`../docs/ROADMAP.md`](../docs/ROADMAP.md).
