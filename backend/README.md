@@ -33,4 +33,4 @@ It also serves the built web app from `web/dist`, so one process runs everything
 Each web account gets a one-time code. "Connect Telegram" opens
 `t.me/<bot>?start=<code>`; the bot's `/start` handler calls
 `backend.messaging.link_telegram(session, code, chat_id)`, after which alerts
-also go to that chat. The bot itself is built separately.
+also go to that chat. The bot itself is roadmap package A2 and is not built yet.

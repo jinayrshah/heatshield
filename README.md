@@ -21,13 +21,14 @@ matters enormously in humid coastal cities like Mumbai.
 | Open-Meteo forecast → hourly WBGT CLI | ✅ done |
 | API, database, alert job (morning, peak, warm night), heartbeat | ✅ done — see [`backend/`](backend/) |
 | Web app: heat now, 7-day outlook, plan a job, Mumbai ward map, symptom check, water near me, sign-up and alerts inbox | ✅ done — see [`web/`](web/) |
-| Alert channels: web inbox, Telegram, WhatsApp Cloud API | ✅ code done; needs bot token / Meta approval to go live |
-| Deployment | ⏳ next |
+| Alert sending: web inbox, Telegram, WhatsApp Cloud API | ✅ senders done; needs bot token / Meta approval to go live |
+| Telegram bot conversation (sign-up, commands) | ⏳ next — roadmap package A2 |
+| Deployment, station data collection | ⏳ next — packages A3, A4 |
 | Street-level ML downscaling | ⏳ planned — see [`ml/`](ml/) |
 | Team mode, weekly summary, regional languages, SMS / voice | ⏳ planned |
 | Low-cost WBGT sensor nodes | ⏸ parked — see [`firmware/`](firmware/) |
 
-Full plan: [`docs/PROPOSAL.md`](docs/PROPOSAL.md) · [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) · [`docs/ROADMAP.md`](docs/ROADMAP.md)
+What happens next, package by package: [`docs/ROADMAP.md`](docs/ROADMAP.md). Background: [`docs/PROPOSAL.md`](docs/PROPOSAL.md) · [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 
 ## Quick start (macOS / Linux)
 

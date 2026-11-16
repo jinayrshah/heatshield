@@ -85,7 +85,7 @@ Decision: **all features below are in scope.** Tiers only set build order (phase
 
 ## 6. Coverage plan (approved)
 
-Decision (2026-11-09, approved by Bhagya Shah): **approved as below, with all 6 focus wards, including P.**
+Decision (2026-11-09, approved by Bhagya Shah): **approved as below, with all 6 focus wards, including P/S.**
 
 - **Alerts, forecasts and dashboard: all of Mumbai (and any location) from day one.**
 - **Street-level ML model: runs over all of Mumbai**, because satellite data covers the whole city at no extra cost.
@@ -98,7 +98,7 @@ Decision (2026-11-09, approved by Bhagya Shah): **approved as below, with all 6 
 | G/N | Dharavi, Dadar, Mahim | Very dense, huge informal workforce |
 | K/E | Andheri East, MIDC, airport | Industrial, construction-heavy, near IMD Santacruz |
 | A | Colaba, Fort | Coastal control with sea breeze, IMD Colaba observatory |
-| P | Goregaon East, Aarey | Green control near forest |
+| P/S | Goregaon East, Aarey | Green control near forest (BMC splits P into P/N and P/S; the focus ward is P/S) |
 
 Station locations to be confirmed during data collection.
 
@@ -123,4 +123,7 @@ Decisions taken while building (change here if you disagree):
 
 ## 8. Open questions
 
-- Approve the phased build plan in `docs/PHASES.md` and its tech-stack choices.
+- After work package A1: accept the wind treatment it proposes for WBGT in calm air.
+- Review and submission dates from the project guide (roadmap task H8).
+
+The plan and the tech stack are in [`ROADMAP.md`](ROADMAP.md).
